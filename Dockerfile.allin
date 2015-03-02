@@ -4,25 +4,30 @@ RUN apt-get -y update
 RUN apt-get -y install emacs24-nox emacs24-el emacs24-common-non-dfsg
 RUN apt-get -y install git tmux curl silversearcher-ag tree htop unzip wget
 RUN apt-get -y install openssh-server
+RUN apt-get -y install default-jdk
 
 # wemux
 RUN git clone https://github.com/zolrath/wemux.git /usr/local/share/wemux
 RUN ln -s /usr/local/share/wemux/wemux /usr/local/bin/wemux
 COPY wemux.conf /usr/local/etc/wemux.conf
 
-# user
-RUN adduser --disabled-password --gecos '' martin
-WORKDIR /home/martin
-USER martin
+# users
+ENV USERNAME martin
+ENV GITHUB_NAME martintrojer
+
+RUN adduser --disabled-password --gecos '' $USERNAME
+WORKDIR /home/$USERNAME
+USER $USERNAME
 RUN mkdir .ssh
-COPY authorized_keys /home/martin/authorized_keys
+COPY authorized_keys /home/$USERNAME/authorized_keys
 RUN mv authorized_keys .ssh
 
-RUN git clone https://github.com/martintrojer/dotfiles.git
+RUN git clone https://github.com/$GITHUB_NAME/dotfiles.git
 RUN dotfiles/.bootstrap.sh -f
 
 USER root
-RUN chown -R martin .ssh
+RUN chown -R $USERNAME .ssh
 RUN chmod -R 0700 .ssh
 
+# sshd
 CMD service ssh start

@@ -1,0 +1,20 @@
+FROM ubuntu:trusty
+
+RUN apt-get -y update
+RUN apt-get -y install git tmux curl tree htop wget nano
+RUN apt-get -y install golang
+
+# Run commands as a user
+ENV USERNAME martin
+ENV GITHUB_NAME martintrojer
+
+RUN adduser --disabled-password --gecos '' $USERNAME
+WORKDIR /home/$USERNAME
+USER $USERNAME
+ENV GOPATH /home/$USERNAME
+
+RUN go get code.google.com/p/gcfg
+RUN go get github.com/dustin/go-humanize
+
+ENV PATH ${PATH}:/home/$USERNAME/bin
+WORKDIR /home/$USERNAME/src/github.com/$GITHUB_NAME/goproject
