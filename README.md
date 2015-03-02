@@ -1,6 +1,6 @@
 # devbox-docker
 
-Development environments in docker containers, for rationale see [blogpost](http).
+Development environments in docker containers, for rationale see [blogpost](http://martintrojer.github.io/software/2015/02/22/moving-my-devboxes-to-docker/).
 
 ## Hybrid
 
@@ -8,7 +8,7 @@ A golang development environment, where your editor/IDE is outside the container
 
 ## All-in
 
-A multi-user, java (remove) development environment with editor built-in.
+A multi-user, java (remove) development environment with editor built-in. Has support for screen-sharing (wemux).
 
 ## Usage
 
