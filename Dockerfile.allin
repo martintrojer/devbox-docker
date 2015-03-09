@@ -24,6 +24,7 @@ RUN mv authorized_keys .ssh
 
 RUN git clone https://github.com/$GITHUB_NAME/dotfiles.git
 RUN dotfiles/.bootstrap.sh -f
+RUN emacs --daemon  # bootstrap the emacs environment
 
 USER root
 RUN chown -R $USERNAME .ssh
