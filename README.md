@@ -14,8 +14,8 @@ A multi-user, java (remove) development environment with editor built-in. Has su
 
 Docker (>=1.5.0)
 
-`$ ./build-all.sh` to build the containters.
+`$ make build-all` to build the containters.
 
-`$ ./connect-local.sh` to launch a bash shell in local container.
+`$ make connect-local` to launch a bash shell in local container.
 
-`$ ./run-remove.sh` to run the 'remove' container, use ssh to connect.
+`$ make run-remove` to run the 'remove' container, use ssh to connect.
